@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:n_folder_ui_design/pages/file_details.dart';
 
 class NFolderPage extends StatefulWidget {
   const NFolderPage({super.key});
@@ -235,7 +236,7 @@ class _NFolderPageState extends State<NFolderPage> {
         currentIndex: selectedIndex,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.access_time),
             label: 'Time',
@@ -249,43 +250,48 @@ class _NFolderPageState extends State<NFolderPage> {
     );
   }
 
-  Container buildProjectMethod(String folderName) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      height: 65,
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.folder,
-                color: Colors.blue[200],
-              ),
-              const SizedBox(
-                width: 12,
-              ),
-              Text(
-                folderName,
-                style: const TextStyle(
-                  fontSize: 16,
+  Widget buildProjectMethod(String folderName) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute<void>(builder: (BuildContext context) => ProjectDetails(folderName: folderName,),));
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        height: 65,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.folder,
+                  color: Colors.blue[200],
                 ),
-              )
-            ],
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.more_vert_rounded,
-              color: Colors.grey,
+                const SizedBox(
+                  width: 12,
+                ),
+                Text(
+                  folderName,
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                )
+              ],
             ),
-          ),
-        ],
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.more_vert_rounded,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
